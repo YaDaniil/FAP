@@ -3,14 +3,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.yadaniil.fap.MainActivity">
+    tools:context="com.yadaniil.fap.MainActivity"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="@dimen/buttonHeight"
+            android:layout_gravity="bottom"
+            android:text="@string/plus"
+            android:id="@+id/plusButton"
+            android:background="@color/green700"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="@dimen/buttonHeight"
+            android:text="@string/minus"
+
+            android:id="@+id/minusButton"
+            android:background="@color/red700"
+            android:layout_gravity="bottom"/>
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/entriesRecyclerView"
+        android:layout_marginBottom="@dimen/buttonHeight">
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_alignBottom="@+id/entriesRecyclerView"
+        android:background="@color/grey500"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/balanceTextView"
+            android:text="Balance: 53245"
+            android:textSize="@dimen/balanceHeight" />
+    </LinearLayout>
+
 </RelativeLayout>
