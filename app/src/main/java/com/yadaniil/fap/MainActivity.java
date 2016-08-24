@@ -7,19 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yadaniil.fap.db.Record;
 
-import java.sql.SQLException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -70,23 +69,27 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle(title);
 
         LayoutInflater layoutInflater = this.getLayoutInflater();
-        View dialogView = layoutInflater.inflate(R.layout.dialog_with_input, null);
+        View dialogView = layoutInflater.inflate(R.layout.dialog_change_balance, null);
         builder.setView(dialogView);
 
-        final EditText editText = (EditText) dialogView.findViewById(R.id.dialog_edit_text);
+        final EditText amountEditText = (EditText) dialogView.findViewById(R.id.dialog_amount_edit_text);
+        final EditText descriptionEditText = (EditText) dialogView.findViewById(R.id.dialog_description_edit_text);
 
         builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                saveAndProcessAmount(editText.getText().toString(), isPlus);
+                saveAndProcessAmount(amountEditText.getText().toString(),
+                        descriptionEditText.getText().toString(), isPlus);
             }
         });
 
         builder.show();
     }
 
-    private void saveAndProcessAmount(String text, boolean isPlus) {
-
+    private void saveAndProcessAmount(String amount, String description, boolean isPlus) {
+        Record record = new Record(new BigDecimal(amount), isPlus, new Date(), description);
+        record.save();
+        ((RecordsAdapter) recordsRecyclewView.getAdapter()).addData(record);
     }
 
     private void initViews() {

@@ -17,6 +17,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/record_item_textview_margin"/>
 
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/gray_12_dividers">
+
+        </View>
+
 
         <TextView
             android:layout_width="0dp"
@@ -26,6 +33,13 @@
             android:text="description"
             android:layout_margin="@dimen/record_item_textview_margin"/>
 
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/gray_12_dividers">
+
+        </View>
 
         <TextView
             android:layout_width="0dp"

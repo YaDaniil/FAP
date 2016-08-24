@@ -5,4 +5,5 @@
     <string name="input_your_income">Input your income</string>
     <string name="input_your_costs">Input your costs</string>
     <string name="ok">Ok</string>
+    <string name="add_description">Add description (optional) :</string>
 </resources>

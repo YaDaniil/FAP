@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.yadaniil.fap.db.Record;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,6 +50,15 @@ public class RecordsAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return recordList.size();
+    }
+
+    public void addData(Record record) {
+        if(recordList == null) {
+            recordList = new ArrayList<>();
+        }
+
+        recordList.add(record);
+        notifyDataSetChanged();
     }
 
 
