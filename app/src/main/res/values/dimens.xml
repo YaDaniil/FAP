@@ -4,4 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="buttonHeight">100dp</dimen>
     <dimen name="balanceHeight">30dp</dimen>
+    <dimen name="record_item_textview_margin">10dp</dimen>
 </resources>
