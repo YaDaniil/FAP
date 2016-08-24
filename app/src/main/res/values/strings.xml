@@ -2,4 +2,7 @@
     <string name="app_name">FAP</string>
     <string name="minus">Minus</string>
     <string name="plus">Plus</string>
+    <string name="input_your_income">Input your income</string>
+    <string name="input_your_costs">Input your costs</string>
+    <string name="ok">Ok</string>
 </resources>

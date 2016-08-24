@@ -35,14 +35,14 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/entriesRecyclerView"
+        android:id="@+id/recordsRecyclerView"
         android:layout_marginBottom="@dimen/buttonHeight">
     </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/entriesRecyclerView"
+        android:layout_alignBottom="@+id/recordsRecyclerView"
         android:background="@color/grey500"
         android:gravity="center">
 
