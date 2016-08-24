@@ -35,7 +35,7 @@ public class RecordsAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Record record = recordList.get(position);
+        Record record = recordList.get(recordList.size() - position - 1);
         RecordHolder recordHolder = (RecordHolder) holder;
 
         String amountString = record.isEarned() ? "+" : "-" + record.getAmount();
