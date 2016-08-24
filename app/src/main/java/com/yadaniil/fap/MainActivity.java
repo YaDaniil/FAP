@@ -1,6 +1,7 @@
 package com.yadaniil.fap;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteException;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -75,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         final EditText amountEditText = (EditText) dialogView.findViewById(R.id.dialog_amount_edit_text);
         final EditText descriptionEditText = (EditText) dialogView.findViewById(R.id.dialog_description_edit_text);
 
+        showKeyboard(amountEditText);
+
         builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -84,6 +88,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         builder.show();
+    }
+
+    private void showKeyboard(final EditText editText) {
+        editText.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                InputMethodManager keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                keyboard.showSoftInput(editText, 0);
+            }
+        },50);
     }
 
     private void saveAndProcessAmount(String amount, String description, boolean isPlus) {
