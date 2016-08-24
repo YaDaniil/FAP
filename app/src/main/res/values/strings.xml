@@ -6,4 +6,5 @@
     <string name="input_your_costs">Input your costs</string>
     <string name="ok">Ok</string>
     <string name="add_description">Add description (optional) :</string>
+    <string name="cancel">Cancel</string>
 </resources>

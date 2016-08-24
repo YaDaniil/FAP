@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAlertDialogWithEditText(final boolean isPlus) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         String title = isPlus ? getString(R.string.input_your_income) : getString(R.string.input_your_costs);
         builder.setTitle(title);
 
@@ -79,11 +79,20 @@ public class MainActivity extends AppCompatActivity {
 
         showKeyboard(amountEditText);
 
+        final AlertDialog alertDialog = builder.create();
+
         builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 saveAndProcessAmount(amountEditText.getText().toString(),
                         descriptionEditText.getText().toString(), isPlus);
+            }
+        });
+
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                alertDialog.cancel();
             }
         });
 
