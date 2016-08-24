@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         initRecyclerView();
         initPlusMinusButtons();
+        getBalanceFromUserIfNecessary();
     }
 
     private void initPlusMinusButtons() {
@@ -58,16 +59,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showMinusDialog() {
-        showAlertDialogWithEditText(false);
+        showAlertDialogWithEditText(false, false);
     }
 
     private void showPlusDialog() {
-        showAlertDialogWithEditText(true);
+        showAlertDialogWithEditText(true, false);
     }
 
-    private void showAlertDialogWithEditText(final boolean isPlus) {
+    private void showAlertDialogWithEditText(final boolean isPlus, final boolean isBalanceAsking) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        String title = isPlus ? getString(R.string.input_your_income) : getString(R.string.input_your_costs);
+        String title;
+        if(isBalanceAsking) {
+            title = getString(R.string.balance_asking);
+        } else {
+            title = isPlus ? getString(R.string.input_your_income)
+                    : getString(R.string.input_your_costs);
+        }
         builder.setTitle(title);
 
         LayoutInflater layoutInflater = this.getLayoutInflater();
@@ -77,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
         final EditText amountEditText = (EditText) dialogView.findViewById(R.id.dialog_amount_edit_text);
         final EditText descriptionEditText = (EditText) dialogView.findViewById(R.id.dialog_description_edit_text);
 
+        if(isBalanceAsking) {
+            descriptionEditText.setVisibility(View.GONE);
+            dialogView.findViewById(R.id.add_description).setVisibility(View.GONE);
+        }
+
         showKeyboard(amountEditText);
 
         final AlertDialog alertDialog = builder.create();
@@ -84,8 +96,14 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                saveAndProcessAmount(amountEditText.getText().toString(),
-                        descriptionEditText.getText().toString(), isPlus);
+                if(isBalanceAsking) {
+                    String amount = amountEditText.getText().toString();
+                    SharedPrefHelper.getInstance().setBalance(amount);
+                    setBalanceTextView(amount);
+                } else {
+                    saveAndProcessAmount(amountEditText.getText().toString(),
+                            descriptionEditText.getText().toString(), isPlus);
+                }
             }
         });
 
@@ -114,6 +132,11 @@ public class MainActivity extends AppCompatActivity {
         Record record = new Record(new BigDecimal(amount), isPlus, new Date(), description);
         record.save();
         ((RecordsAdapter) recordsRecyclewView.getAdapter()).addData(record);
+        BigDecimal oldBalance = new BigDecimal(SharedPrefHelper.getInstance().getBalance());
+        BigDecimal newBalance = isPlus ? oldBalance.add(new BigDecimal(amount))
+                : oldBalance.subtract(new BigDecimal(amount));
+        SharedPrefHelper.getInstance().setBalance(newBalance.toPlainString());
+        setBalanceTextView(newBalance.toPlainString());
     }
 
     private void initViews() {
@@ -136,5 +159,20 @@ public class MainActivity extends AppCompatActivity {
             Log.e("MainActivity", "initRecyclerView:" + e.getMessage());
         }
         recordsRecyclewView.setAdapter(new RecordsAdapter(this, records));
+    }
+
+    public void getBalanceFromUserIfNecessary() {
+        if(SharedPrefHelper.getInstance().getBalance() == null) {
+            showAskingBalanceDialog();
+        }
+    }
+
+    private void showAskingBalanceDialog() {
+        showAlertDialogWithEditText(true, true);
+    }
+
+    public void setBalanceTextView(String balanceTextView) {
+        this.balanceTextView.setText(getString(R.string.balance) + ": " + balanceTextView
+                + " " + getString(R.string.uah));
     }
 }

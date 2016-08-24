@@ -38,7 +38,7 @@ public class RecordsAdapter extends RecyclerView.Adapter {
         Record record = recordList.get(recordList.size() - position - 1);
         RecordHolder recordHolder = (RecordHolder) holder;
 
-        String amountString = record.isEarned() ? "+" : "-" + record.getAmount();
+        String amountString = (record.isEarned() ? "+" : "-") + record.getAmount();
         recordHolder.amount.setText(amountString);
 
         recordHolder.description.setText(record.getDescription());

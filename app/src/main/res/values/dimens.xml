@@ -5,7 +5,7 @@
     <dimen name="buttonHeight">100dp</dimen>
     <dimen name="balanceHeight">30dp</dimen>
     <dimen name="record_item_textview_margin">10dp</dimen>
-    <dimen name="dialog_edit_text_margin">22dp</dimen>
+    <dimen name="dialog_edit_text_margin">25dp</dimen>
     <dimen name="text_size_normal">16dp</dimen>
     <dimen name="recycler_view_bottom_margin">100dp</dimen>
 </resources>
