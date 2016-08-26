@@ -1,9 +1,9 @@
 package com.yadaniil.fap;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteException;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private Button plusButton;
     private Button minusButton;
     private TextView balanceTextView;
-    private RecyclerView recordsRecyclewView;
+    private RecyclerView recordsRecyclerView;
 
 
     @Override
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     private void saveAndProcessAmount(String amount, String description, boolean isPlus) {
         Record record = new Record(new BigDecimal(amount), isPlus, new Date(), description);
         record.save();
-        ((RecordsAdapter) recordsRecyclewView.getAdapter()).addData(record);
+        ((RecordsAdapter) recordsRecyclerView.getAdapter()).addData(record);
         BigDecimal oldBalance = new BigDecimal(SharedPrefHelper.getInstance().getBalance());
         BigDecimal newBalance = isPlus ? oldBalance.add(new BigDecimal(amount))
                 : oldBalance.subtract(new BigDecimal(amount));
@@ -143,13 +143,13 @@ public class MainActivity extends AppCompatActivity {
         plusButton = (Button) findViewById(R.id.plusButton);
         minusButton= (Button) findViewById(R.id.minusButton);
         balanceTextView = (TextView) findViewById(R.id.balanceTextView);
-        recordsRecyclewView = (RecyclerView) findViewById(R.id.recordsRecyclerView);
+        recordsRecyclerView = (RecyclerView) findViewById(R.id.recordsRecyclerView);
     }
 
 
     private void initRecyclerView() {
-        recordsRecyclewView.setLayoutManager(new LinearLayoutManager(this));
-        recordsRecyclewView.addItemDecoration(new SimpleRecyclerViewDivider(this));
+        recordsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recordsRecyclerView.addItemDecoration(new SimpleRecyclerViewDivider(this));
 
         List<Record> records;
         try {
@@ -158,12 +158,14 @@ public class MainActivity extends AppCompatActivity {
             records = new ArrayList<>();
             Log.e("MainActivity", "initRecyclerView:" + e.getMessage());
         }
-        recordsRecyclewView.setAdapter(new RecordsAdapter(this, records));
+        recordsRecyclerView.setAdapter(new RecordsAdapter(this, records));
     }
 
     public void getBalanceFromUserIfNecessary() {
         if(SharedPrefHelper.getInstance().getBalance() == null) {
             showAskingBalanceDialog();
+        } else {
+            setBalanceTextView(SharedPrefHelper.getInstance().getBalance());
         }
     }
 
