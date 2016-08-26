@@ -43,7 +43,7 @@ public class RecordsAdapter extends RecyclerView.Adapter {
 
         recordHolder.description.setText(record.getDescription());
 
-        String dateString = new SimpleDateFormat("HH:mm dd-MM-yyyy").format(record.getDate());
+        String dateString = new SimpleDateFormat("HH:mm\ndd-MM-yyyy").format(record.getDate());
         recordHolder.date.setText(dateString);
     }
 

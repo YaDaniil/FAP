@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/dialog_amount_edit_text"
         android:inputType="numberDecimal"
+        android:maxLength="8"
         android:layout_margin="@dimen/dialog_edit_text_margin"/>
 
     <TextView
@@ -23,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dialog_description_edit_text"
-        android:inputType="text"
+        android:inputType="textCapSentences"
         android:layout_margin="@dimen/dialog_edit_text_margin"/>
 
 </LinearLayout>

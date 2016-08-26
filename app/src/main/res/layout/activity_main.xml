@@ -10,23 +10,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
+        <ImageButton
             android:layout_width="0dp"
             android:layout_weight="0.5"
             android:layout_height="@dimen/buttonHeight"
             android:layout_gravity="bottom"
-            android:text="@string/plus"
             android:id="@+id/plusButton"
-            android:background="@color/green700"/>
+            android:src="@drawable/ic_attach_money_black_24dp"
+            android:background="@color/green600"/>
 
-        <Button
+        <ImageButton
             android:layout_width="0dp"
             android:layout_weight="0.5"
             android:layout_height="@dimen/buttonHeight"
-            android:text="@string/minus"
-
+            android:src="@drawable/ic_money_off_black_24dp"
             android:id="@+id/minusButton"
-            android:background="@color/red700"
+            android:background="@color/red400"
             android:layout_gravity="bottom"/>
 
 
@@ -36,22 +35,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recordsRecyclerView"
-        android:layout_marginBottom="@dimen/recycler_view_bottom_margin"
-        android:layout_marginTop="35dp">
+        android:layout_marginBottom="@dimen/buttonHeight"
+        android:layout_marginTop="30dp">
     </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey500"
+        android:background="@color/colorPrimary"
         android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/balanceTextView"
-            android:text="Balance: 53245"
-            android:textSize="@dimen/balanceHeight" />
+            android:text="Balance: 0 UAH"
+            android:textColor="@android:color/white"
+            android:singleLine="true"
+            android:textSize="@dimen/balanceHeightAndSize" />
     </LinearLayout>
 
 </RelativeLayout>
