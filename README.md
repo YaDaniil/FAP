@@ -10,4 +10,5 @@ TODO:
 - [ ] Add tab which will represent new feature: debts
 - [ ] Parce currencies list and add feature of switching between them (UAH, RUB, USD)
 - [ ] Create statistics page
+- [ ] Ability to set or edit date of payment
 
